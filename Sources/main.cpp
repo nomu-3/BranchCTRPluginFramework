@@ -162,13 +162,13 @@ namespace CTRPluginFramework
         u64 title_id =Process::GetTitleID();
         switch (title_id)
         {
-            case 0x004000000000000:
+            case 0x004000000000000:    //titleID1
             menu_1(menu);
             break;
-            case 0x004000000000000:
+            case 0x004000000000000:    //titleID2
             menu_2(menu);
             break;
-            case 0x004000000000000:
+            case 0x004000000000000:    //titleID3
             menu_3(menu);
             break;
             default:
