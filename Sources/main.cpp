@@ -1,8 +1,14 @@
 #include "3ds.h"
 #include "csvc.h"
 #include "CTRPluginFramework.hpp"
-
+#include "Cheats.hpp"
 #include <vector>
+#include <ctime>
+#include "ctrulib/result.h"
+#include "ctrulib/svc.h"
+#include "ctrulib/ipc.h"
+#include "ctrulib/os.h"
+#include "ctrulib/srv.h"
 
 namespace CTRPluginFramework
 {
