@@ -4,11 +4,6 @@
 #include "Cheats.hpp"
 #include <vector>
 #include <ctime>
-#include "ctrulib/result.h"
-#include "ctrulib/svc.h"
-#include "ctrulib/ipc.h"
-#include "ctrulib/os.h"
-#include "ctrulib/srv.h"
 
 namespace CTRPluginFramework
 {
@@ -89,52 +84,6 @@ namespace CTRPluginFramework
         svcCloseHandle(processHandle);
     }
     
-    std::string SystemInfomation()
-    {
-        char date[6400];
-        std::time_t unix_time = std::time(nullptr);
-        struct tm *time_struct = gmtime((const time_t *)&unix_time);
-        std::string am_or_pm;
-        const std::vector<std::string> kListTimeOfTheWeek{"Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Satur"};
-        int time_of_the_week = time_struct->tm_wday;
-        const int kStartYear = 1900;
-        const int kStartMonth = 1;
-        int year = time_struct->tm_year + kStartYear;
-        int month = time_struct->tm_mon + kStartMonth;
-        int day = time_struct->tm_mday;
-        int hour_24 = time_struct->tm_hour;
-        int hour_12;
-        int minute = time_struct->tm_min;
-        int second = time_struct->tm_sec;
-        if (hour_24 / 12)
-        {
-            am_or_pm = "Pm";
-        }
-        else
-        {
-            am_or_pm = "Am";
-        }
-        if (hour_24 % 12)
-        {
-            hour_12 = hour_24 % 12;
-        }
-        else
-        {
-            hour_12 = 12;
-        }
-
-        std::string systeminfo = Utils::Format("%d/%02d/%02d(%s) %s:%02d:%02d:%02d", year, month, day, kListTimeOfTheWeek[time_of_the_week].c_str(), am_or_pm.c_str(), hour_12, minute, second);
-        return systeminfo;
-    }
-    
-    void DrawCallBack(Time time)
-    {
-        const Screen& scr = OSD::GetTopScreen();
-        scr.DrawRect(30, 4, 340, 18, Color::Black, true);
-        scr.DrawRect(32, 6, 336, 14, Color::White, false);
-        scr.DrawSysfont(SystemInfomation(), 35, 5, Color::White);
-    }
-    
     static const std::string About = Color(255,255,255) << "Create library: Nanquitas\nCreate nomu-3:";
 
     // This function is called before main and before the game starts
@@ -188,9 +137,6 @@ namespace CTRPluginFramework
 
         // Synnchronize the menu with frame event
         menu->SynchronizeWithFrame(true);
-        
-        // Add NewFrame
-        menu->OnNewFrame = DrawCallBack;
 
         // Init our menu entries & folders
         ChoiceMenu(*menu);
